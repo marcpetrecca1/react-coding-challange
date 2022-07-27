@@ -1,10 +1,23 @@
+import { useState, useEffect } from 'react';
+import { getPhotos } from '../api/api.js';
 import Head from 'next/head';
 import Image from 'next/image';
-import ImageCard from '../components/ImageCard';
-import ImageList from '../components/ImageList';
+import ImageCard from '../components/ImageCard.js';
+import ImageList from '../components/ImageList.js';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
+  const [imageState, setImageState] = useState([]);
+
+  const getImages = async () => {
+    try {
+      const list = await getPhotos();
+      setImageState([...imageState, list]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -15,14 +28,22 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to Resplash! &#40;Using Unsplash API&#41;
+          Welcome to Resplash! &#40;Using{' '}
+          <a
+            href='https://unsplash.com/'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            Unsplash
+          </a>{' '}
+          API&#41;
         </h1>
 
         <p className={styles.description}>
           I do not claim ownership of the images on this page
         </p>
 
-        <div className={styles.grid}>
+        {/* <div className={styles.grid}>
           <a href='https://nextjs.org/docs' className={styles.card}>
             <h2>Documentation &rarr;</h2>
             <p>Find in-depth information about Next.js features and API.</p>
@@ -50,7 +71,7 @@ export default function Home() {
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
           </a>
-        </div>
+        </div> */}
       </main>
 
       <footer className={styles.footer}>
