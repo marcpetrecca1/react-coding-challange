@@ -15,7 +15,11 @@ const ImageCard = ({ imageOwner, likes, profileLink, imageUrl, url }) => (
         </span>
         <span className={styles.likes}>
           {likes ? 'Likes ' : null}
-          {likes ? likes : 'Give this photo its first like!'}
+          {likes ? (
+            <span className={styles.numberOfLikes}>{likes}</span>
+          ) : (
+            'Give this photo its first like!'
+          )}
         </span>
       </div>
     </a>
