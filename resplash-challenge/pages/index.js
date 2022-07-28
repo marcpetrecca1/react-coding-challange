@@ -22,6 +22,7 @@ export async function getStaticProps() {
 
 export default function Home({ actualData }) {
   const [imageState, setImageState] = useState(actualData);
+  const [page, setPage] = useState(1);
 
   useEffect(() => getImages, []);
 
@@ -35,6 +36,20 @@ export default function Home({ actualData }) {
       setImageState([...imageState, list.data]);
     } catch (error) {
       console.error('this is the error', error);
+    }
+  };
+
+  const infiniteScroll = () => {
+    // End of the document reached?
+    if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+      // let newPage = this.state.page;
+      // newPage++;
+      // this.setState({
+      //   page: newPage,
+      // });
+      setPage(page++);
+      // this.fetchData(newPage);
+      getImages();
     }
   };
 

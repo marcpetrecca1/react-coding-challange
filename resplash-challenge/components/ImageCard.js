@@ -2,7 +2,7 @@ import styles from '../styles/ImageCard.module.css';
 import Image from 'next/image';
 
 const ImageCard = ({ imageOwner, likes, profileLink, imageUrl, url }) => (
-  <did className={styles.cardContainer}>
+  <div className={styles.cardContainer}>
     <a className={styles.imageCard} href={imageUrl}>
       <img
         src={`${url}`}
@@ -19,7 +19,7 @@ const ImageCard = ({ imageOwner, likes, profileLink, imageUrl, url }) => (
         </span>
       </div>
     </a>
-  </did>
+  </div>
 );
 
 export default ImageCard;
