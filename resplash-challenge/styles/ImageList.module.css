@@ -1,6 +1,7 @@
 .imageList {
-  grid-column-gap: 1.5rem;
-  align-items: start;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 3rem;
+  align-items: start;
 }
