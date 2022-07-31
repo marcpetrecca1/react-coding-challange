@@ -3,14 +3,13 @@
   border-radius: 10px;
 }
 
-.cardContainer:hover {
+/* .cardContainer:hover {
   border: 0.4px solid #e3e8ed;
-}
+} */
 
 .imageCard {
   align-self: center;
   justify-self: center;
-  transition: 0.1s ease-in-out;
   border-radius: 10px;
 }
 

@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import axios from 'axios';
 import { AccessKey } from '../unsplash.config';
 import Head from 'next/head';
-import Image from 'next/image';
-import ImageList from '../components/ImageList.js';
 import styles from '../styles/Home.module.css';
 
 export async function getStaticProps() {
@@ -20,36 +19,43 @@ export async function getStaticProps() {
   };
 }
 
+const DynamicList = dynamic(() => import('../components/ImageList.js'), {
+  suspense: true,
+});
+
 export default function Home({ actualData }) {
   const [imageState, setImageState] = useState(actualData);
   const [page, setPage] = useState(1);
+  let offset = 0;
 
-  useEffect(() => getImages, []);
+  useEffect(() => window.addEventListener('scroll', handleScroll), []);
 
-  const getPhotos = () => {
-    return axios.get(`https://api.unsplash.com/photos?client_id=${AccessKey}`);
+  const getPhotos = (key) => {
+    return axios.get(`https://api.unsplash.com/photos/random?count=10`, {
+      headers: {
+        Authorization: `Client-ID ${key}`,
+      },
+    });
   };
 
-  const getImages = async () => {
+  const getImages = async (key) => {
     try {
-      const list = await getPhotos();
-      setImageState([...imageState, list.data]);
+      setPage(page + 1);
+      const list = await getPhotos(key);
+      let newList = list.data;
+      setImageState((oldState) => [...oldState, newList]);
+      console.log('this is list', list.data);
     } catch (error) {
       console.error('this is the error', error);
     }
   };
 
-  const infiniteScroll = () => {
-    // End of the document reached?
-    if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
-      // let newPage = this.state.page;
-      // newPage++;
-      // this.setState({
-      //   page: newPage,
-      // });
-      setPage(page++);
-      // this.fetchData(newPage);
-      getImages();
+  const handleScroll = (e) => {
+    if (
+      e.target.documentElement.scrollTop + window.innerHeight + 1 >
+      e.target.documentElement.scrollHeight
+    ) {
+      getImages(AccessKey);
     }
   };
 
@@ -77,8 +83,9 @@ export default function Home({ actualData }) {
         <p className={styles.description}>
           I do not claim ownership of the images on this page
         </p>
-
-        {!imageState ? null : <ImageList imageState={imageState} />}
+        <Suspense fallback={`Loading...`}>
+          {!imageState ? null : <DynamicList imageState={imageState} />}
+        </Suspense>
       </main>
 
       <footer className={styles.footer}>

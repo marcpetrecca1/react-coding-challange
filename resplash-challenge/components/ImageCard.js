@@ -1,5 +1,4 @@
 import styles from '../styles/ImageCard.module.css';
-import Image from 'next/image';
 
 const ImageCard = ({ imageOwner, likes, profileLink, imageUrl, url }) => (
   <div className={styles.cardContainer}>
