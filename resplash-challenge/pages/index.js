@@ -25,7 +25,6 @@ const DynamicList = dynamic(() => import('../components/ImageList.js'), {
 
 export default function Home({ actualData }) {
   const [imageState, setImageState] = useState(actualData);
-  const productionKey = API_KEY;
 
   useEffect(() => window.addEventListener('scroll', handleScroll), []);
 
@@ -53,7 +52,7 @@ export default function Home({ actualData }) {
       e.target.documentElement.scrollTop + window.innerHeight + 1 >
       e.target.documentElement.scrollHeight
     ) {
-      getImages(productionKey);
+      getImages(process.env.API_KEY);
     }
   };
 
