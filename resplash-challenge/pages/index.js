@@ -25,7 +25,7 @@ const DynamicList = dynamic(() => import('../components/ImageList.js'), {
 
 export default function Home({ actualData }) {
   const [imageState, setImageState] = useState(actualData);
-  const productionKey = process.env.API_KEY;
+  const productionKey = API_KEY;
 
   useEffect(() => window.addEventListener('scroll', handleScroll), []);
 
