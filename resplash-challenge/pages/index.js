@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
-import { AccessKey } from '../unsplash.config';
+import { AccessKey } from '../unsplash.config.js';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
