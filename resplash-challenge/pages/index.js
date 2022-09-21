@@ -37,7 +37,6 @@ export default function Home({ actualData }) {
   };
 
   const getImages = async (key) => {
-    console.log(key);
     try {
       const list = await getPhotos(key);
       let newList = list.data;
@@ -52,7 +51,7 @@ export default function Home({ actualData }) {
       e.target.documentElement.scrollTop + window.innerHeight + 1 >
       e.target.documentElement.scrollHeight
     ) {
-      getImages(process.env.API_KEY);
+      getImages(process.env.PUBLIC_KEY);
     }
   };
 
