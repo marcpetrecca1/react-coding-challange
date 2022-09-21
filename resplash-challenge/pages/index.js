@@ -1,13 +1,13 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
-import { AccessKey } from '../unsplash.config.js';
+// import { AccessKey } from '../unsplash.config.js';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
 export async function getStaticProps() {
   const initalFetch = await axios.get(
-    `https://api.unsplash.com/photos?client_id=${AccessKey}`
+    `https://api.unsplash.com/photos?client_id=${process.env.API_KEY}`
   );
 
   const actualData = initalFetch.data;
