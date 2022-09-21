@@ -38,6 +38,7 @@ export default function Home({ actualData }) {
   };
 
   const getImages = async (key) => {
+    console.log(key);
     try {
       const list = await getPhotos(key);
       let newList = list.data;
