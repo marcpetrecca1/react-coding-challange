@@ -2,6 +2,7 @@ import React, { useState, useEffect, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
 // import { AccessKey } from '../unsplash.config.js';
+import { config } from 'dotenv';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
@@ -25,6 +26,7 @@ const DynamicList = dynamic(() => import('../components/ImageList.js'), {
 
 export default function Home({ actualData }) {
   const [imageState, setImageState] = useState(actualData);
+  config();
 
   useEffect(() => window.addEventListener('scroll', handleScroll), []);
 
