@@ -51,7 +51,7 @@ export default function Home({ actualData }) {
       e.target.documentElement.scrollTop + window.innerHeight + 1 >
       e.target.documentElement.scrollHeight
     ) {
-      return getImages(process.env.API_KEY);
+      getImages(process.env.API_KEY);
     }
   };
 
