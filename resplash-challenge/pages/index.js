@@ -7,7 +7,7 @@ import styles from '../styles/Home.module.css';
 
 export async function getStaticProps() {
   const initalFetch = await axios.get(
-    `https://api.unsplash.com/photos?client_id=${process.env.API_KEY}`
+    `https://api.unsplash.com/photos?client_id=${process.env.NEXT_PUBLIC_API_KEY}`
   );
 
   const actualData = initalFetch.data;
@@ -51,7 +51,7 @@ export default function Home({ actualData }) {
       e.target.documentElement.scrollTop + window.innerHeight + 1 >
       e.target.documentElement.scrollHeight
     ) {
-      getImages(process.env.PUBLIC_KEY);
+      getImages(process.env.NEXT_PUBLIC_API_KEY);
     }
   };
 
