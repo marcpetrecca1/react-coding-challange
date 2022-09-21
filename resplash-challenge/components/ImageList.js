@@ -6,11 +6,12 @@ const ImageList = ({ imageState }) => {
     <div className={styles.imageList}>
       {imageState.map((image) => (
         <ImageCard
-          key={image.id}
-          imageOwner={image.user?.name}
+          key={image?.id}
+          imageOwner={image?.user?.name}
           likes={image?.likes}
-          profileLink={image.user?.links.self}
-          url={image?.urls?.small}
+          profileLink={image?.user?.links?.html}
+          image={image?.urls?.small}
+          url={image?.links?.html}
         />
       ))}
     </div>

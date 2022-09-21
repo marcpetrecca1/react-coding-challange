@@ -25,8 +25,6 @@ const DynamicList = dynamic(() => import('../components/ImageList.js'), {
 
 export default function Home({ actualData }) {
   const [imageState, setImageState] = useState(actualData);
-  const [page, setPage] = useState(1);
-  let offset = 0;
 
   useEffect(() => window.addEventListener('scroll', handleScroll), []);
 
@@ -40,11 +38,9 @@ export default function Home({ actualData }) {
 
   const getImages = async (key) => {
     try {
-      setPage(page + 1);
       const list = await getPhotos(key);
       let newList = list.data;
-      setImageState((oldState) => [...oldState, newList]);
-      console.log('this is list', list.data);
+      setImageState((prevState) => [...prevState, ...newList]);
     } catch (error) {
       console.error('this is the error', error);
     }
@@ -55,7 +51,7 @@ export default function Home({ actualData }) {
       e.target.documentElement.scrollTop + window.innerHeight + 1 >
       e.target.documentElement.scrollHeight
     ) {
-      getImages(AccessKey);
+      return getImages(AccessKey);
     }
   };
 
