@@ -1,4 +1,4 @@
-Deployed on Vercel: https://react-coding-challange-gray.vercel.app/
+Deployed on Vercel: Visit https://react-coding-challange-orcin.vercel.app/ to see deployment.
 
 This is a coding challenge for prospective front-end and full-stack developer applicants applying to Lexie.
 
